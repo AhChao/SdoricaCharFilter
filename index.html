@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html> <!--style="background-image: url(./img/htmlBackground_light.jpg) ;"-->
+<html style="background-color: 	#FFDEAD;"> <!--style="background-image: url(./img/htmlBackground_light.jpg) ;"-->
+<iframe id="textData" src="Data/characterData.txt" style="display: none;" /></iframe>
 <head>
 	<title>Sdorica 角色關鍵字篩選</title>	
 	<h1 ><img src="./Img/background.jpg" width="50" height="50"/>Sdorica 角色關鍵字篩選</h1>
@@ -55,18 +56,47 @@
 		<input type="checkbox" value="獨有狀態">獨有狀態
 		<input type="checkbox" value="獨有疊層">獨有疊層
 		<input type="checkbox" value="移除魂芯">移除魂芯
+		<input type="checkbox" value="重整版面">重整版面
 		<input type="checkbox" value="冷卻增加">冷卻增加
 		<input type="checkbox" value="冷卻歸零">冷卻歸零
 		<input type="checkbox" value="正面狀態">正面狀態
 		<input type="checkbox" value="負面狀態">負面狀態
+		<input type="checkbox" value="條件增傷">條件增傷
 		<input type="checkbox" value="型態切換">型態切換
 		<input type="checkbox" value="歸零">歸零
 		<input type="checkbox" value="額外觸發">額外觸發
 	</div>
+	<div id="passiveRule">
+		<label>被動/參謀相關：</label>
+		<input type="checkbox" value="死亡">死亡
+		<input type="checkbox" value="條件觸發">條件觸發
+		<input type="checkbox" value="主動">主動
+		<input type="checkbox" value="被動">被動
+	</div>
 	<button onclick="getResult()">查詢</button>
 	<br><br>
+
+	<svg id="basicSVG" width="2000" height="2000">
+		<g id="basicIcon">
+			<image x="270" y="0" width="70" height="70" xlink:href="./Img/oneBlock_icon.png"></image>
+			<image x="520" y="0" width="70" height="70" xlink:href="./Img/twoBlock_icon.png"></image>
+			<image x="770" y="0" width="70" height="70" xlink:href="./Img/fourBlock_icon.png"></image>
+			<image x="1020" y="0" width="70" height="70" xlink:href="./Img/passiveSkill_icon.png"></image>
+			<image x="1270" y="0" width="70" height="70" xlink:href="./Img/advisorSkill_icon.png"></image>
+			<path d="M 180,0 l 0,2000" stroke="#886600" stroke-width="5"/>
+			<path d="M 430,0 l 0,2000" stroke="#886600" stroke-width="5"/>
+			<path d="M 680,0 l 0,2000" stroke="#886600" stroke-width="5"/>
+			<path d="M 930,0 l 0,2000" stroke="#886600" stroke-width="5"/>
+			<path d="M 1180,0 l 0,2000" stroke="#886600" stroke-width="5"/>
+			<path d="M 0,100 l 1500,0" stroke="#886600" stroke-width="5"/>
+		</g>
+		<g id="resultGroup">
+
+		</g>
+	</svg>
 </body>
 
-<script src="./lib/jquery-3.2.1.min.js"></script>
-<script src="./lib/d3.v3.min.js"></script>
+<script src="./Lib/jquery-3.2.1.min.js"></script>
+<script src="./Lib/d3.v3.min.js"></script>
+<script src="./Src/main.js"></script>
 </html>
