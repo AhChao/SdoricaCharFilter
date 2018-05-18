@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html> <!--style="background-image: url(./img/htmlBackground_light.jpg) ;"-->
+<head>
+	<title>Sdorica 角色關鍵字篩選</title>	
+	<h1 ><img src="./Img/background.jpg" width="50" height="50"/>Sdorica 角色關鍵字篩選</h1>
+</head>
+<link rel="stylesheet" type="text/css" href="./Src/indexCSS.css">
+<body >	
+	<div id="characterType">
+		<label>角色類型：</label>
+		<input type="checkbox" value="金位"  >金位
+		<input type="checkbox" value="黑位" name="black">黑位
+		<input type="checkbox" value="白位" name="white">白位
+	</div>
+	<div id="actionType">
+	<!--治療，疊盾，基礎傷害，破甲傷害，穿透傷害，純狀態，斬殺-->
+		<label>行動類型：</label>
+		<input type="checkbox" value="治療">治療
+		<input type="checkbox" value="疊盾">疊盾
+		<input type="checkbox" value="基礎傷害">基礎傷害
+		<input type="checkbox" value="破甲傷害">破甲傷害
+		<input type="checkbox" value="穿透傷害">穿透傷害
+		<input type="checkbox" value="純狀態">純狀態
+		<input type="checkbox" value="斬殺">斬殺
+	</div>
+	<div id="targetCharacter">
+		<label>作用對象：</label>
+		<input type="checkbox" value="指定單體">指定單體
+		<input type="checkbox" value="隨機單體">隨機單體
+		<input type="checkbox" value="自身">自身
+		<input type="checkbox" value="全體">全體
+		<input type="checkbox" value="首位">首位
+		<input type="checkbox" value="末位">末位
+		<input type="checkbox" value="條件對象">條件對象
+		<input type="checkbox" value="雙方">雙方
+		<input type="checkbox" value="我方">我方
+		<input type="checkbox" value="敵方">敵方
+		<input type="checkbox" value="首位以外">首位以外
+	</div>
+	<div id="buffAndDebuff">
+		<label>增益減益：</label>
+		<input type="checkbox" value="強化">強化
+		<input type="checkbox" value="弱化">弱化
+		<input type="checkbox" value="易傷">易傷
+		<input type="checkbox" value="減傷">減傷
+		<input type="checkbox" value="靈巧">靈巧
+		<input type="checkbox" value="中毒"中毒
+		<input type="checkbox" value="再生">再生
+		<input type="checkbox" value="撕裂">撕裂
+		<input type="checkbox" value="轉盾">轉盾
+		<input type="checkbox" value="盾轉">盾轉
+		<input type="checkbox" value="戰意">戰意
+		<br>
+		<label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+		<input type="checkbox" value="獨有狀態">獨有狀態
+		<input type="checkbox" value="獨有疊層">獨有疊層
+		<input type="checkbox" value="移除魂芯">移除魂芯
+		<input type="checkbox" value="冷卻增加">冷卻增加
+		<input type="checkbox" value="冷卻歸零">冷卻歸零
+		<input type="checkbox" value="正面狀態">正面狀態
+		<input type="checkbox" value="負面狀態">負面狀態
+		<input type="checkbox" value="型態切換">型態切換
+		<input type="checkbox" value="歸零">歸零
+		<input type="checkbox" value="額外觸發">額外觸發
+	</div>
+	<button onclick="getResult()">查詢</button>
+	<br><br>
+</body>
+
+<script src="./lib/jquery-3.2.1.min.js"></script>
+<script src="./lib/d3.v3.min.js"></script>
+</html>
