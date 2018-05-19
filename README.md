@@ -1,6 +1,6 @@
 # SdoricaCharFilter
 
-![](/Img/background.jpg =250x250)
+<img src="/Img/background.jpg" width="250" height="250"></img>
 
 **使用說明**
 - 就是一個簡單的關鍵字快查 / 過濾

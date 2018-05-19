@@ -4,11 +4,12 @@ var characterType ={
 	"白位":["安潔莉亞","奧斯塔","芙蕾莉卡","荷絲緹雅","庫爾","琉","麗莎","普吉","夏洛克","希歐SP","西奧多","蒂卡"],
 }
 var content;
-var fontColor=["#000000","#003C9D","#7A0099","#EEEE00"];
+var fontColor=["#000000","#003C9D","#7A0099","#DAA520"];
 var fontSize = 16;
 function getResult()
 {
 	//重置版面
+	d3.select("#basicSVG").attr("width",1800).attr("height",500);
 	d3.select("#resultGroup").remove();
 	d3.select("#basicSVG").append("g").attr("id","resultGroup");
 
@@ -116,7 +117,10 @@ function getResult()
 		{
 			for(var i in characterType[typeVertify[0]])
 			{
-				if(name == characterType[typeVertify[0]][i])
+				var comparedName = name;
+				if(typeof comparedName.split("Skin")[1] !="undefined")
+					comparedName = comparedName.split("Skin")[0];
+				if(comparedName == characterType[typeVertify[0]][i])
 					rightCharacter.push(name);
 			}
 		}		
@@ -129,15 +133,12 @@ function getResult()
 	}	
 	else
 	{
-		console.log("這",typeof typeVertify[0]);
 		if((typeof ruleForFilter[0] != "undefined" || typeof typeVertify[0] != "undefined") && typeof rightCharacter[0] != "undefined")
 		{
-			console.log("這");
 			for(var i in rightCharacter)
 			{
 				var drawline = true;
 				showCharacter(rightCharacter[i],i);
-				console.log("畫:",rightCharacter[i],i);
 				if(typeof rightCharacter[i].split("Skin")[1] =="undefined")//表原版
 				{
 					
@@ -166,7 +167,6 @@ function getResult()
 			for(var i in content )//全部顯示 無條件
 			{
 				var drawline = true;
-				console.log("畫:",content[i],i);
 				showCharacter(i,times);
 				
 				if(typeof i.split("Skin")[1] =="undefined")//表原版
@@ -199,7 +199,7 @@ function showCharacter(charName,order)
 {
 	var x = 0;
 	var y = 100 + 150*order;
-	console.log(charName,charName.split("Skin"));
+	//console.log(charName,charName.split("Skin"));
 	if(typeof charName.split("Skin")[1] =="undefined")//skin跟原版連著放，skin不給頭圖
 	{
 		d3.select("#resultGroup").append("svg:image").attr({
@@ -210,6 +210,8 @@ function showCharacter(charName,order)
 		"xlink:href":"./Img/"+ charName +".png",
 		});
 	}	
+	if(y+70>d3.select("#basicSVG").attr("height"))//自動延長y
+		d3.select("#basicSVG").attr("height",y+100);
 	printText("resultGroup", charName, x + 80, y + 35, fontColor[0]);
 	for(var i in content[charName])//一魂到參謀
 	{
@@ -221,8 +223,8 @@ function showCharacter(charName,order)
 		{
 			var xSpaceLength = countLength(content[charName][i],j%3);
 			//console.log(xSpaceLength,x + (i*1+1)*200 + xSpaceLength*fontSize,x,(i*1+1)*250,xSpaceLength*fontSize);
-			if(j>=3)
-				insideY = insideY+20;
+			if(j==3) insideY = insideY+20;
+			if(j==6) insideY = insideY+20;
 			if(content[charName][i][j][0].length>1)
 			{
 				printText("resultGroup", content[charName][i][j][0] , x + (i*1+1)*250 + xSpaceLength*fontSize , insideY, fontColor[content[charName][i][j][1]]);
@@ -231,7 +233,7 @@ function showCharacter(charName,order)
 			{
 				printText("resultGroup", content[charName][i][j] , x + (i*1+1)*250 + xSpaceLength*fontSize , insideY, fontColor[0]);
 			}
-			if(j != content[charName][i].length-1) printText("resultGroup", "，" , x + (i*1+1)*250 + (countLength(content[charName][i],j+1)-1)*fontSize , insideY, fontColor[0]);
+			if(j != content[charName][i].length-1) printText("resultGroup", "，" , x + (i*1+1)*250 + (countLength(content[charName][i],j%3+1)-1)*fontSize , insideY, fontColor[0]);
 		}		
 	}
 	//console.log(content[charName]);
@@ -239,20 +241,34 @@ function showCharacter(charName,order)
 
 function countLength(anArray,index)
 {
-	var length = 0;
+	var length = 0; 
+	var startIndex = Math.floor(index/3);
+	var endIndex = Math.floor(index/3) + index%3;
+	//index=index%3;
+	//console.log(index,startIndex,endIndex);
 	for(var i in anArray)
 	{
 		if(i<index)
 		{
 			if(anArray[i][0].length>1)
 			{
-				//console.log("朝");
 				length = length*1 + anArray[i][0].length*1 + 1;
 			}
 			else
 				length = length*1 + anArray[i].length*1 + 1;
 		}
 	}
+	/*console.log(anArray,startIndex,anArray[startIndex]);
+	for(;startIndex<endIndex;startIndex++)
+	{
+		if(typeof anArray[startIndex][0] !="undefined")
+		{
+			length = length*1 + anArray[startIndex][0].length*1 + 1;
+		}
+		else
+			length = length*1 + anArray[startIndex].length*1 + 1;
+	}
+	console.log("length:",length);*/
 	return length;
 }
 
