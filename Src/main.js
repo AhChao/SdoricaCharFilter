@@ -8,21 +8,19 @@ var fontColor=["#000000","#003C9D","#7A0099","#EEEE00"];
 var fontSize = 16;
 function getResult()
 {
-	//找那些打勾的放到一個陣列
-	//用陣列去找讀檔讀到的資料
-	//列出符合條件的
-	//空陣列就全列出
+	//重置版面
+	d3.select("#resultGroup").remove();
+	d3.select("#basicSVG").append("g").attr("id","resultGroup");
 
 	//資料準備:角色資料
 	var myIFrame = document.getElementById("textData");
 	content = myIFrame.contentWindow.document.body.childNodes[0].innerHTML;
 	content = JSON.parse(content);
-	//console.log(content);
 	var rightCharacter=[];
 
 	//資料準備：篩選選項
 	var ruleForFilter=[];
-	var ruleArray = ["characterType","actionType","targetCharacter","buffAndDebuff"];
+	var ruleArray = ["actionType","targetCharacter","buffAndDebuff","passiveRule"];//角色type另外驗證
 	for(var i in ruleArray)
 	{
 		for(var j in d3.select("#"+ruleArray[i]).node().childNodes)//走訪SVG內所有圖形做相交比較
@@ -38,12 +36,28 @@ function getResult()
 			}
 		}
 	}
-	console.log(ruleForFilter);
+	console.log("篩選規則:",ruleForFilter);
+
+	var typeVertify = [];
+	for(var i in d3.select("#characterTypeForm").node().childNodes)
+	{
+		var node = d3.select("#characterTypeForm").node().childNodes[i];
+		var tagName = node.tagName;
+		if(tagName=="INPUT")
+		{
+			if(node.checked)
+			{
+				typeVertify.push(node.value);
+			}
+		}
+	}
+	console.log("角色類型:",typeVertify);
 
 	//走全部的角色資料，確認是否符合全部的勾選項
 	for(var name in content)
 	{
 		var allCorrespond = false;
+
 		for(var ruleNo in ruleForFilter)
 		{
 			var singleCorrespond = false;
@@ -82,20 +96,43 @@ function getResult()
 		}
 		if(allCorrespond)
 		{
-			rightCharacter.push(name);
+			if(typeof typeVertify[0] !="undefined")
+			{
+				for(var i in characterType[typeVertify[0]])
+				{
+					if(name == characterType[typeVertify[0]][i])
+						rightCharacter.push(name);
+				}
+			}
+			else{
+				rightCharacter.push(name);
+			}			
 		}
 		allCorrespond = false;
 	}
+	if(typeof typeVertify[0] != "undefined" && typeof ruleForFilter[0] == "undefined")
+	{
+		for(var name in content)
+		{
+			for(var i in characterType[typeVertify[0]])
+			{
+				if(name == characterType[typeVertify[0]][i])
+					rightCharacter.push(name);
+			}
+		}		
+	}
 
 	//console.log(ruleForFilter,rightCharacter,typeof rightCharacter[0]);
-	if (typeof rightCharacter[0] == "undefined")
+	if (typeof rightCharacter[0] == "undefined"&& typeof ruleForFilter[0] != "undefined")
 	{
 		d3.select("#resultGroup").append("text").text("無符合條件的目標").attr("y","150");
 	}	
 	else
 	{
-		if(typeof ruleForFilter[0] != "undefined" && typeof rightCharacter[0] != "undefined")
+		console.log("這",typeof typeVertify[0]);
+		if((typeof ruleForFilter[0] != "undefined" || typeof typeVertify[0] != "undefined") && typeof rightCharacter[0] != "undefined")
 		{
+			console.log("這");
 			for(var i in rightCharacter)
 			{
 				var drawline = true;
@@ -123,9 +160,37 @@ function getResult()
 				}		
 			}
 		}
-		else if(typeof ruleForFilter[0] == "undefined")
+		else if(typeof ruleForFilter[0] == "undefined"&& typeof typeVertify[0] == "undefined")
 		{
-			for(var i in content );//全部顯示 無條件
+			var times=0;
+			for(var i in content )//全部顯示 無條件
+			{
+				var drawline = true;
+				console.log("畫:",content[i],i);
+				showCharacter(i,times);
+				
+				if(typeof i.split("Skin")[1] =="undefined")//表原版
+				{
+					
+					for(var j in content)
+					{
+						if(j==i+"Skin")//表示有skin，就不畫給Skin畫
+						{
+							drawline = false;
+						}
+					}										
+				}
+				if(drawline)
+				{
+					d3.select("#resultGroup").append("path").attr(
+					{
+						"d":"M 0,"+(150*times+200*1)+" l 1500,0",
+						"stroke":"#886600",
+						"stroke-width":"5",
+					});
+				}
+				times++;
+			}
 		}
 	}
 }

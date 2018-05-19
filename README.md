@@ -1,6 +1,6 @@
 # SdoricaCharFilter
 
-![Alt text](/Img/background.jpg =200x200)
+![](/Img/background.jpg =250x250)
 
 **使用說明**
 - 就是一個簡單的關鍵字快查 / 過濾
