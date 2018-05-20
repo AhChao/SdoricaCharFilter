@@ -33,11 +33,16 @@ function getResult()
 		{
 			var node = d3.select("#"+ruleArray[i]).node().childNodes[j]
 			var tagName = node.tagName;
-			if(tagName=="INPUT")
+			if(tagName=="LABEL")
 			{
-				if(node.checked)
+				for(var k in node.childNodes)
 				{
-					ruleForFilter.push(node.value);
+					var cnode = node.childNodes[k];
+					var ctagName = cnode.tagName;
+					if(ctagName=="INPUT"&&cnode.checked)
+					{
+						ruleForFilter.push(cnode.value);
+					}
 				}
 			}
 		}
@@ -49,11 +54,16 @@ function getResult()
 	{
 		var node = d3.select("#characterTypeForm").node().childNodes[i];
 		var tagName = node.tagName;
-		if(tagName=="INPUT")
+		if(tagName=="LABEL")
 		{
-			if(node.checked)
+			for(var k in node.childNodes)
 			{
-				typeVertify.push(node.value);
+				var cnode = node.childNodes[k];
+				var ctagName = cnode.tagName;
+				if(ctagName=="INPUT"&&cnode.checked)
+				{
+					typeVertify.push(cnode.value);
+				}
 			}
 		}
 	}
@@ -248,8 +258,8 @@ function showCharacter(charName,order)
 		}
 	}
 	if(rectColorIndex=="金位") rectColorIndex=0;
-	else if(rectColorIndex=="白位") rectColorIndex=1;
-	else if(rectColorIndex=="黑位") rectColorIndex=2;	
+	else if(rectColorIndex=="黑位") rectColorIndex=1;
+	else if(rectColorIndex=="白位") rectColorIndex=2;	
 	d3.select("#resultGroup").append("svg:rect").attr({
 		"x":x,
 		"y":y-40,
@@ -371,15 +381,51 @@ function clearRule()
 {
 	var ruleArray = ["characterType","actionType","targetCharacter","buffAndDebuff","passiveRule"];//角色type另外驗證
 	for(var i in ruleArray)
-	{
+	{		
 		for(var j in d3.select("#"+ruleArray[i]).node().childNodes)//走訪SVG內所有圖形做相交比較
 		{
-			var node = d3.select("#"+ruleArray[i]).node().childNodes[j]
+			var node = d3.select("#"+ruleArray[i]).node().childNodes[j];
 			var tagName = node.tagName;
-			if(tagName=="INPUT")
+			if(ruleArray[i]=="characterType")
 			{
-				node.checked = false;
+				if(tagName=="FORM")
+				{
+					for(var k in node.childNodes)
+					{
+						var cnode = node.childNodes[k];
+						var ctagName = cnode.tagName;
+						console.log(ctagName);
+						if(ctagName=="LABEL")
+						{
+							for(var h in cnode.childNodes)
+							{
+								var ccnode = cnode.childNodes[h];
+								var cctagName = ccnode.tagName;	
+								if(cctagName=="INPUT")
+								{
+									ccnode.checked = false;
+								}
+							}							
+						}
+					}			
+				}
 			}
+			else
+			{
+				if(tagName=="LABEL")
+				{
+					for(var k in node.childNodes)
+					{
+						var cnode = node.childNodes[k];
+						var ctagName = cnode.tagName;
+
+						if(ctagName=="INPUT")
+						{
+							cnode.checked = false;
+						}
+					}				
+				}
+			}			
 		}
 	}
 }
