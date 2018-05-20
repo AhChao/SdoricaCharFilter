@@ -50,9 +50,9 @@ function getResult()
 	console.log("篩選規則:",ruleForFilter);
 
 	var typeVertify = [];
-	for(var i in d3.select("#characterTypeForm").node().childNodes)
+	for(var i in d3.select("#characterType").node().childNodes)
 	{
-		var node = d3.select("#characterTypeForm").node().childNodes[i];
+		var node = d3.select("#characterType").node().childNodes[i];
 		var tagName = node.tagName;
 		if(tagName=="LABEL")
 		{
@@ -134,13 +134,16 @@ function getResult()
 		{
 			if(typeof typeVertify[0] !="undefined")
 			{
-				for(var i in characterType[typeVertify[0]])
+				for(var typeIndex in typeVertify)
 				{
-					var comparedName = name;
-					if(typeof comparedName.split("Skin")[1] !="undefined")
-						comparedName = comparedName.split("Skin")[0];
-					if(comparedName == characterType[typeVertify[0]][i])
-						rightCharacter.push(name);
+					for(var i in characterType[typeVertify[typeIndex]])
+					{
+						var comparedName = name;
+						if(typeof comparedName.split("Skin")[1] !="undefined")
+							comparedName = comparedName.split("Skin")[0];
+						if(comparedName == characterType[typeVertify[typeIndex]][i])
+							rightCharacter.push(name);
+					}
 				}
 			}
 			else{
@@ -153,13 +156,16 @@ function getResult()
 	{
 		for(var name in content)
 		{
-			for(var i in characterType[typeVertify[0]])
+			for(var typeIndex in typeVertify)
 			{
-				var comparedName = name;
-				if(typeof comparedName.split("Skin")[1] !="undefined")
-					comparedName = comparedName.split("Skin")[0];
-				if(comparedName == characterType[typeVertify[0]][i])
-					rightCharacter.push(name);
+				for(var i in characterType[typeVertify[typeIndex]])
+				{
+					var comparedName = name;
+					if(typeof comparedName.split("Skin")[1] !="undefined")
+						comparedName = comparedName.split("Skin")[0];
+					if(comparedName == characterType[typeVertify[typeIndex]][i])
+						rightCharacter.push(name);
+				}
 			}
 		}		
 	}
@@ -386,46 +392,19 @@ function clearRule()
 		{
 			var node = d3.select("#"+ruleArray[i]).node().childNodes[j];
 			var tagName = node.tagName;
-			if(ruleArray[i]=="characterType")
+			if(tagName=="LABEL")
 			{
-				if(tagName=="FORM")
+				for(var k in node.childNodes)
 				{
-					for(var k in node.childNodes)
-					{
-						var cnode = node.childNodes[k];
-						var ctagName = cnode.tagName;
-						console.log(ctagName);
-						if(ctagName=="LABEL")
-						{
-							for(var h in cnode.childNodes)
-							{
-								var ccnode = cnode.childNodes[h];
-								var cctagName = ccnode.tagName;	
-								if(cctagName=="INPUT")
-								{
-									ccnode.checked = false;
-								}
-							}							
-						}
-					}			
-				}
-			}
-			else
-			{
-				if(tagName=="LABEL")
-				{
-					for(var k in node.childNodes)
-					{
-						var cnode = node.childNodes[k];
-						var ctagName = cnode.tagName;
+					var cnode = node.childNodes[k];
+					var ctagName = cnode.tagName;
 
-						if(ctagName=="INPUT")
-						{
-							cnode.checked = false;
-						}
-					}				
-				}
-			}			
+					if(ctagName=="INPUT")
+					{
+						cnode.checked = false;
+					}
+				}				
+			}						
 		}
 	}
 }
