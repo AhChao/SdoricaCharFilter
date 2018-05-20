@@ -5,6 +5,7 @@ var characterType ={
 }
 var content;
 var fontColor=["#000000","#003C9D","#7A0099","#DAA520"];
+var rectColor=["#DAA520","#888888","#FFFFFF"];
 var fontSize = 16;
 var rightCharacter=[];
 var ruleForFilter=[];
@@ -125,7 +126,10 @@ function getResult()
 			{
 				for(var i in characterType[typeVertify[0]])
 				{
-					if(name == characterType[typeVertify[0]][i])
+					var comparedName = name;
+					if(typeof comparedName.split("Skin")[1] !="undefined")
+						comparedName = comparedName.split("Skin")[0];
+					if(comparedName == characterType[typeVertify[0]][i])
 						rightCharacter.push(name);
 				}
 			}
@@ -187,6 +191,10 @@ function getResult()
 		else if(typeof ruleForFilter[0] == "undefined"&& typeof typeVertify[0] == "undefined")
 		{
 			var times=0;
+			for(var i in content )
+			{
+				rightCharacter.push(i);
+			}
 			for(var i in content )//全部顯示 無條件
 			{
 				var drawline = true;
@@ -221,7 +229,34 @@ function getResult()
 function showCharacter(charName,order)
 {
 	var x = 0;
-	var y = 100 + 150*order;		
+	var y = 100 + 150*order;
+
+	var rectColorIndex;
+	for(var i in characterType)
+	{
+		for(var j in characterType[i])
+		{			
+			var comparedName = charName;
+			if(typeof comparedName.split("Skin")[1] !="undefined")
+				comparedName = comparedName.split("Skin")[0];
+			//console.log(characterType[i][j],comparedName);
+			if(comparedName == characterType[i][j])
+			{
+				rectColorIndex = i;
+				break;
+			}
+		}
+	}
+	if(rectColorIndex=="金位") rectColorIndex=0;
+	else if(rectColorIndex=="白位") rectColorIndex=1;
+	else if(rectColorIndex=="黑位") rectColorIndex=2;	
+	d3.select("#resultGroup").append("svg:rect").attr({
+		"x":x,
+		"y":y-40,
+		"width":190,
+		"height":150,
+		"fill":rectColor[rectColorIndex],
+		});		
 															
 	if(typeof charName.split("Skin")[1] =="undefined")//表非Skin，skin跟原版連著放，skin不給頭圖
 	{
@@ -240,7 +275,7 @@ function showCharacter(charName,order)
 		{
 			if(rightCharacter[i]+"Skin"==charName)//表示有skin，就不畫給Skin畫
 			{
-				drawPic = false
+				drawPic = false;
 			}			
 		}
 		if(drawPic)
@@ -253,7 +288,8 @@ function showCharacter(charName,order)
 			"xlink:href":"./Img/"+ charName.split("Skin")[0] +".png",
 			});
 		}
-	}
+	}	
+
 	if(y+70>d3.select("#basicSVG").attr("height"))//自動延長y
 		d3.select("#basicSVG").attr("height",y+100);
 	printText("resultGroup", charName, x + 80, y + 35, fontColor[0]);
