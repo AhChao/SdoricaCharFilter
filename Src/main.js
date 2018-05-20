@@ -6,6 +6,8 @@ var characterType ={
 var content;
 var fontColor=["#000000","#003C9D","#7A0099","#DAA520"];
 var fontSize = 16;
+var rightCharacter=[];
+var ruleForFilter=[];
 function getResult()
 {
 	//重置版面
@@ -17,10 +19,10 @@ function getResult()
 	var myIFrame = document.getElementById("textData");
 	content = myIFrame.contentWindow.document.body.childNodes[0].innerHTML;
 	content = JSON.parse(content);
-	var rightCharacter=[];
+	rightCharacter=[];
 
 	//資料準備：篩選選項
-	var ruleForFilter=[];
+	ruleForFilter=[];
 	var ruleArray = ["actionType","targetCharacter","buffAndDebuff","passiveRule"];//角色type另外驗證
 	for(var i in ruleArray)
 	{
@@ -199,8 +201,9 @@ function showCharacter(charName,order)
 {
 	var x = 0;
 	var y = 100 + 150*order;
-	//console.log(charName,charName.split("Skin"));
-	if(typeof charName.split("Skin")[1] =="undefined")//skin跟原版連著放，skin不給頭圖
+	//console.log(charName,charName.split("Skin"));				
+															
+	if(typeof charName.split("Skin")[1] =="undefined")//表非Skin，skin跟原版連著放，skin不給頭圖
 	{
 		d3.select("#resultGroup").append("svg:image").attr({
 		"x":x,
@@ -209,7 +212,28 @@ function showCharacter(charName,order)
 		"height":70,
 		"xlink:href":"./Img/"+ charName +".png",
 		});
-	}	
+	}
+	else//只有skin還是要顯示
+	{
+		var drawPic = true;
+		for(var i in rightCharacter)
+		{
+			if(rightCharacter[i]+"Skin"==charName)//表示有skin，就不畫給Skin畫
+			{
+				drawPic = false
+			}			
+		}
+		if(drawPic)
+		{
+			d3.select("#resultGroup").append("svg:image").attr({
+			"x":x,
+			"y":y,
+			"width":70,
+			"height":70,
+			"xlink:href":"./Img/"+ charName.split("Skin")[0] +".png",
+			});
+		}
+	}
 	if(y+70>d3.select("#basicSVG").attr("height"))//自動延長y
 		d3.select("#basicSVG").attr("height",y+100);
 	printText("resultGroup", charName, x + 80, y + 35, fontColor[0]);
@@ -274,10 +298,46 @@ function countLength(anArray,index)
 
 function printText(targetSVG,text,x,y,color)
 {
+	var underline = false;
+	for (var i in ruleForFilter) 
+	{
+		if(text==ruleForFilter[i])
+			underline = true;
+	}
 	d3.select("#resultGroup").append("svg:text").text(text).attr({
-		"x": x,
-		"y": y,
-		"fill":color,
-		"font-size":fontSize,
+	"x": x,
+	"y": y,
+	"fill":color,
+	"font-size":fontSize,
 	});
+	if(underline)
+	{
+		d3.select("#resultGroup").append("svg:rect").attr({
+		"x": x-2,
+		"y": y-fontSize-1,
+		"width":text.length*fontSize+3,
+		"height":fontSize*1+5,
+		"fill": "None",
+		"stroke": "#B22222",
+		"stroke-width": 3,
+		"stroke-alignment":"outside",
+		});
+	}
+}
+
+function clearRule()
+{
+	var ruleArray = ["characterType","actionType","targetCharacter","buffAndDebuff","passiveRule"];//角色type另外驗證
+	for(var i in ruleArray)
+	{
+		for(var j in d3.select("#"+ruleArray[i]).node().childNodes)//走訪SVG內所有圖形做相交比較
+		{
+			var node = d3.select("#"+ruleArray[i]).node().childNodes[j]
+			var tagName = node.tagName;
+			if(tagName=="INPUT")
+			{
+				node.checked = false;
+			}
+		}
+	}
 }

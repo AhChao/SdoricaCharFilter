@@ -77,7 +77,11 @@
 		<input type="checkbox" value="轉盾">轉盾
 		<img src="./Img/轉盾.png" width="20" height="20" style="display: inline;">
 		<input type="checkbox" value="盾轉">盾轉
+		<img src="./Img/盾轉.png" width="20" height="20" style="display: inline;">
+		<input type="checkbox" value="嘲諷">嘲諷
+		<img src="./Img/嘲諷.png" width="20" height="20" style="display: inline;">
 		<input type="checkbox" value="戰意">戰意
+		<img src="./Img/戰意.png" width="20" height="20" style="display: inline;">
 		<br>
 		<label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
 		<input type="checkbox" value="獨有狀態">獨有狀態
@@ -102,15 +106,18 @@
 	<div id="passiveRule">
 		<label>被動/參謀相關：</label>
 		<input type="checkbox" value="主動">主動
-		<input type="checkbox" value="被動">被動
+		<input type="checkbox" value="被動">被動		
 		<input type="checkbox" value="戰鬥開始">戰鬥開始
 		<input type="checkbox" value="回合開始">回合開始
+		<input type="checkbox" value="回合結束">回合結束
 		<input type="checkbox" value="死亡">死亡
+		<input type="checkbox" value="反擊">反擊
 		<input type="checkbox" value="條件觸發">條件觸發		
 		<input type="checkbox" value="魂芯轉換">魂芯轉換
 		<input type="checkbox" value="效果增加">效果增加
 	</div>
 	<button onclick="getResult()">過濾</button>
+	<button onclick="clearRule()">清空條件</button>
 	<br><br>
 
 	<svg id="basicSVG" width="1800" height="500">
