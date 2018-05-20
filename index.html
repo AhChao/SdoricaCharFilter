@@ -116,8 +116,14 @@
 		<input type="checkbox" value="魂芯轉換">魂芯轉換
 		<input type="checkbox" value="效果增加">效果增加
 	</div>
-	<button onclick="getResult()">過濾</button>
 	<button onclick="clearRule()">清空條件</button>
+	<button onclick="getResult()">過濾</button>	
+	<h>(以單一技能過濾 </h>	
+	<input type="checkbox" id="" onchange="changeFliterWay()">
+	<h>)</h>
+	<h>(不顯示篩選紅框 </h>	
+	<input type="checkbox" id="" onchange="changeHighLightStroke()">
+	<h>)</h>
 	<br><br>
 
 	<svg id="basicSVG" width="1800" height="500">

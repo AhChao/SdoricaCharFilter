@@ -8,6 +8,8 @@ var fontColor=["#000000","#003C9D","#7A0099","#DAA520"];
 var fontSize = 16;
 var rightCharacter=[];
 var ruleForFilter=[];
+var oneSkillFliter = false;
+var noHighLightStroke = false;
 function getResult()
 {
 	//重置版面
@@ -61,42 +63,62 @@ function getResult()
 	{
 		var allCorrespond = false;
 
-		for(var ruleNo in ruleForFilter)
+		if(!oneSkillFliter)
 		{
-			var singleCorrespond = false;
-			for(var i in content[name])//一魂到參謀
+			for(var ruleNo in ruleForFilter)
 			{
-				for(var j in content[name][i])//各技能的細項
+				var singleCorrespond = false;
+				for(var i in content[name])//一魂到參謀
 				{
-					if(content[name][i][j][0].length>1)
+					for(var j in content[name][i])//各技能的細項
 					{
-						if(ruleForFilter[ruleNo]==content[name][i][j][0])
+						if(content[name][i][j][0].length>1)
 						{
-							singleCorrespond=true;
-							break;
+							if(ruleForFilter[ruleNo]==content[name][i][j][0])
+							{
+								singleCorrespond=true;
+								break;
+							}
+						}
+						else
+						{
+							if(ruleForFilter[ruleNo]==content[name][i][j])
+							{
+								singleCorrespond=true;
+								break;
+							}
 						}
 					}
-					else
-					{
-						if(ruleForFilter[ruleNo]==content[name][i][j])
-						{
-							singleCorrespond=true;
-							break;
-						}
-					}
+					if(singleCorrespond) break; 
 				}
-				if(singleCorrespond) break; 
-			}
-			if(singleCorrespond==false)
-			{
-				break;
-			}
-			singleCorrespond = false;
-			if(ruleNo==ruleForFilter.length-1)
-			{
-				allCorrespond = true;
+				if(singleCorrespond==false)
+				{
+					break;
+				}
+				singleCorrespond = false;
+				if(ruleNo==ruleForFilter.length-1)
+				{
+					allCorrespond = true;
+				}
 			}
 		}
+		else//單技能過濾
+		{
+			for(var i in content[name])//一魂到參謀
+			{
+				console.log(name,ruleForFilter,content[name][i]);
+				for(var ruleNo in ruleForFilter)//驗證單一技能是否有所有rule
+				{
+					console.log(content[name][i],ruleForFilter[ruleNo],content[name][i].indexOf(ruleForFilter[ruleNo]));
+					if(content[name][i].indexOf(ruleForFilter[ruleNo])==-1) break;					
+					if(ruleNo==ruleForFilter.length-1)//到最後一個rule為止都有成功找到搜索條件
+					{
+						allCorrespond = true;
+					}
+				}			
+			}
+		}
+
 		if(allCorrespond)
 		{
 			if(typeof typeVertify[0] !="undefined")
@@ -128,7 +150,6 @@ function getResult()
 		}		
 	}
 
-	//console.log(ruleForFilter,rightCharacter,typeof rightCharacter[0]);
 	if (typeof rightCharacter[0] == "undefined"&& typeof ruleForFilter[0] != "undefined")
 	{
 		d3.select("#resultGroup").append("text").text("無符合條件的目標").attr("y","150");
@@ -200,8 +221,7 @@ function getResult()
 function showCharacter(charName,order)
 {
 	var x = 0;
-	var y = 100 + 150*order;
-	//console.log(charName,charName.split("Skin"));				
+	var y = 100 + 150*order;		
 															
 	if(typeof charName.split("Skin")[1] =="undefined")//表非Skin，skin跟原版連著放，skin不給頭圖
 	{
@@ -246,7 +266,6 @@ function showCharacter(charName,order)
 		for(var j in content[charName][i])//各細項
 		{
 			var xSpaceLength = countLength(content[charName][i],j%3);
-			//console.log(xSpaceLength,x + (i*1+1)*200 + xSpaceLength*fontSize,x,(i*1+1)*250,xSpaceLength*fontSize);
 			if(j==3) insideY = insideY+20;
 			if(j==6) insideY = insideY+20;
 			if(content[charName][i][j][0].length>1)
@@ -260,7 +279,6 @@ function showCharacter(charName,order)
 			if(j != content[charName][i].length-1) printText("resultGroup", "，" , x + (i*1+1)*250 + (countLength(content[charName][i],j%3+1)-1)*fontSize , insideY, fontColor[0]);
 		}		
 	}
-	//console.log(content[charName]);
 }
 
 function countLength(anArray,index)
@@ -268,8 +286,6 @@ function countLength(anArray,index)
 	var length = 0; 
 	var startIndex = Math.floor(index/3);
 	var endIndex = Math.floor(index/3) + index%3;
-	//index=index%3;
-	//console.log(index,startIndex,endIndex);
 	for(var i in anArray)
 	{
 		if(i<index)
@@ -282,27 +298,16 @@ function countLength(anArray,index)
 				length = length*1 + anArray[i].length*1 + 1;
 		}
 	}
-	/*console.log(anArray,startIndex,anArray[startIndex]);
-	for(;startIndex<endIndex;startIndex++)
-	{
-		if(typeof anArray[startIndex][0] !="undefined")
-		{
-			length = length*1 + anArray[startIndex][0].length*1 + 1;
-		}
-		else
-			length = length*1 + anArray[startIndex].length*1 + 1;
-	}
-	console.log("length:",length);*/
 	return length;
 }
 
 function printText(targetSVG,text,x,y,color)
 {
-	var underline = false;
+	var highLightStroke = false;
 	for (var i in ruleForFilter) 
 	{
 		if(text==ruleForFilter[i])
-			underline = true;
+			highLightStroke = true;
 	}
 	d3.select("#resultGroup").append("svg:text").text(text).attr({
 	"x": x,
@@ -310,7 +315,8 @@ function printText(targetSVG,text,x,y,color)
 	"fill":color,
 	"font-size":fontSize,
 	});
-	if(underline)
+	if(noHighLightStroke) highLightStroke =false;
+	if(highLightStroke)
 	{
 		d3.select("#resultGroup").append("svg:rect").attr({
 		"x": x-2,
@@ -340,4 +346,14 @@ function clearRule()
 			}
 		}
 	}
+}
+
+function changeFliterWay()
+{
+	oneSkillFliter = !oneSkillFliter;
+}
+
+function changeHighLightStroke()
+{
+	noHighLightStroke = !noHighLightStroke;
 }
