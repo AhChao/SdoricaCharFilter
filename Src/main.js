@@ -117,11 +117,34 @@ function getResult()
 		{
 			for(var i in content[name])//一魂到參謀
 			{
-				console.log(name,ruleForFilter,content[name][i]);
+				//console.log(name,ruleForFilter,content[name][i]);
 				for(var ruleNo in ruleForFilter)//驗證單一技能是否有所有rule
 				{
-					console.log(content[name][i],ruleForFilter[ruleNo],content[name][i].indexOf(ruleForFilter[ruleNo]));
-					if(content[name][i].indexOf(ruleForFilter[ruleNo])==-1) break;					
+					//console.log(content[name][i],ruleForFilter[ruleNo],content[name][i].indexOf(ruleForFilter[ruleNo]));
+					//if(content[name][i].indexOf(ruleForFilter[ruleNo])==-1) break; 不能這樣找 因為有兩層的技能
+					var ruleFound = false;
+					for(var j in content[name][i])//遍歷單一技能所有細項
+					{
+						if(content[name][i][j][0].length>1)
+						{
+							if(content[name][i][j][0]==ruleForFilter[ruleNo])
+							{
+								ruleFound=true;
+								break;
+							}
+						}
+						else
+						{
+							if(content[name][i][j]==ruleForFilter[ruleNo])
+							{
+								ruleFound=true;
+								break;
+							}
+						}
+						if(j == content[name][i].length-1&&!ruleFound)
+							break;
+					}			
+					if(!ruleFound) break
 					if(ruleNo==ruleForFilter.length-1)//到最後一個rule為止都有成功找到搜索條件
 					{
 						allCorrespond = true;
