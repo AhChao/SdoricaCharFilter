@@ -1,147 +1,161 @@
 <!DOCTYPE html>
-<html style="background-color: 	#FFDEAD;"> <!--style="background-image: url(./img/htmlBackground_light.jpg) ;"-->
+<html style="background-color:  #FFDEAD;"> <!--style="background-image: url(./img/htmlBackground_light.jpg) ;"-->
 <iframe id="textData" src="Data/characterData.txt" style="display: none;" /></iframe>
 <head>
-	<title>Sdorica 角色關鍵字篩選</title>	
-	<h1 ><img src="./Img/background.jpg" width="50" height="50"/>Sdorica 角色關鍵字篩選</h1>
+  <title>Sdorica 角色關鍵字篩選</title>
 </head>
+<div class="header">
+  <img src="./Img/background.jpg" width="50" height="50"/>&nbsp;<h1>Sdorica 角色關鍵字篩選</h1>
+</div>
 <link rel="stylesheet" type="text/css" href="./Src/indexCSS.css">
-<body >
-	<div>
-		<label style="font-size:20px;">【使用說明】</label>
-		<p>就是一個簡單的關鍵字搜索 / 過濾。為求資訊簡潔化，效果回合、說明都被省略或改用其他方式描述。
-		<label style="color:#B22222;">正確的使用方式</label>是找到目標後去遊戲內看詳細資料。</p>
-		<p>僅會顯示符合<label style="color:#B22222;">所有勾選條件</label>的結果。</p>
-	</div>	
-	<hr>
-	<div id="characterType">
-		<label>角色類型：</label>
-		<label><input type="checkbox" value="金位" name="characterType">金位
-		<img src="./Img/金位.png" width="20" height="20" style="display: inline;"></label>
-		<label><input type="checkbox" value="黑位" name="characterType">黑位
-		<img src="./Img/黑位.png" width="20" height="20" style="display: inline;"></label>
-		<label><input type="checkbox" value="白位" name="characterType">白位
-		<img src="./Img/白位.png" width="20" height="20" style="display: inline;"></label>
-	</div>
-	<hr>
-	<div id="actionType">
-	<!--治療，疊盾，基礎傷害，破甲傷害，穿透傷害，純狀態，斬殺-->
-		<label>行動類型：</label>
-		<label><input type="checkbox" value="治療">治療</label>
-		<label><input type="checkbox" value="疊盾">疊盾</label>
-		<label><input type="checkbox" value="基礎傷害">基礎傷害</label>
-		<label><input type="checkbox" value="破甲傷害">破甲傷害</label>
-		<label><input type="checkbox" value="穿透傷害">穿透傷害</label>
-		<label><input type="checkbox" value="斬殺">斬殺</label>
-	</div>
-	<hr>
-	<div id="targetCharacter">
-		<label>作用對象：</label>
-		<label><input type="checkbox" value="指定單體">指定單體</label>
-		<label><input type="checkbox" value="隨機單體">隨機單體</label>
-		<label><input type="checkbox" value="自身">自身</label>
-		<label><input type="checkbox" value="全體">全體</label>
-		<label><input type="checkbox" value="首位">首位</label>
-		<label><input type="checkbox" value="末位">末位</label>
-		<label><input type="checkbox" value="條件對象">條件對象</label>
-		<label><input type="checkbox" value="雙方">雙方</label>
-		<label><input type="checkbox" value="我方">我方</label>
-		<label><input type="checkbox" value="同伴">同伴</label>
-		<label><input type="checkbox" value="敵方">敵方</label>
-		<label><input type="checkbox" value="首位以外">首位以外</label>
-		<label><input type="checkbox" value="金位">金位</label>
-		<label><input type="checkbox" value="黑位">黑位</label>
-		<label><input type="checkbox" value="白位">白位</label>
-	</div>
-	<hr>
-	<div id="buffAndDebuff">
-		<label>增益減益：</label>
-		<label><input type="checkbox" value="強化">強化
-		<img src="./Img/強化.png" width="20" height="20" style="display: inline;"></label>
-		<label><input type="checkbox" value="弱化">弱化
-		<img src="./Img/弱化.png" width="20" height="20" style="display: inline;"></label>
-		<label><input type="checkbox" value="易傷">易傷
-		<img src="./Img/易傷.png" width="20" height="20" style="display: inline;"></label>
-		<label><input type="checkbox" value="減傷">減傷
-		<img src="./Img/減傷.png" width="20" height="20" style="display: inline;"></label>
-		<label><input type="checkbox" value="靈巧">靈巧
-		<img src="./Img/靈巧.png" width="20" height="20" style="display: inline;"></label>
-		<label><input type="checkbox" value="中毒">中毒
-		<img src="./Img/中毒.png" width="20" height="20" style="display: inline;"></label>
-		<label><input type="checkbox" value="再生">再生
-		<img src="./Img/再生.png" width="20" height="20" style="display: inline;"></label>
-		<label><input type="checkbox" value="撕裂">撕裂
-		<img src="./Img/撕裂.png" width="20" height="20" style="display: inline;"></label>
-		<label><input type="checkbox" value="轉盾">轉盾
-		<img src="./Img/轉盾.png" width="20" height="20" style="display: inline;"></label>
-		<label><input type="checkbox" value="盾轉">盾轉
-		<img src="./Img/盾轉.png" width="20" height="20" style="display: inline;"></label>
-		<label><input type="checkbox" value="嘲諷">嘲諷
-		<img src="./Img/嘲諷.png" width="20" height="20" style="display: inline;"></label>
-		<label><input type="checkbox" value="戰意">戰意
-		<img src="./Img/戰意.png" width="20" height="20" style="display: inline;"></label>
-		<br>
-		<label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
-		<label><input type="checkbox" value="獨有狀態">獨有狀態
-		<img src="./Img/獨有疊層.png" width="20" height="20" style="display: inline;"></label>
-		<label><input type="checkbox" value="獨有疊層">獨有疊層
-		<img src="./Img/獨有疊層.png" width="20" height="20" style="display: inline;"></label>
-		<label><input type="checkbox" value="移除魂芯">移除魂芯</label>
-		<label><input type="checkbox" value="重整版面">重整版面</label>
-		<label><input type="checkbox" value="冷卻增加">冷卻增加</label>
-		<label><input type="checkbox" value="冷卻歸零">冷卻歸零</label>
-		<br>
-		<label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
-		<label><input type="checkbox" value="正面狀態">正面狀態</label>
-		<label><input type="checkbox" value="負面狀態">負面狀態</label>
-		<label><input type="checkbox" value="解除狀態">解除狀態</label>
-		<label><input type="checkbox" value="條件增傷">條件增傷</label>
-		<label><input type="checkbox" value="型態切換">型態切換</label>
-		<label><input type="checkbox" value="額外技能">額外技能</label>
-		<label><input type="checkbox" value="自身失血">自身失血</label>
-	</div>
-	<hr>
-	<div id="passiveRule">
-		<label>被動/參謀相關：</label>
-		<label><input type="checkbox" value="主動">主動</label>
-		<label><input type="checkbox" value="被動">被動</label>
-		<label><input type="checkbox" value="戰鬥開始">戰鬥開始</label>
-		<label><input type="checkbox" value="回合開始">回合開始</label>
-		<label><input type="checkbox" value="回合結束">回合結束</label>
-		<label><input type="checkbox" value="死亡">死亡</label>
-		<label><input type="checkbox" value="反擊">反擊</label>
-		<label><input type="checkbox" value="條件觸發">條件觸發</label>	
-		<label><input type="checkbox" value="魂芯轉換">魂芯轉換</label>
-		<label><input type="checkbox" value="效果增加">效果增加</label>
-	</div>
-	<button onclick="clearRule()">清空條件</button>
-	<button onclick="getResult()">過濾</button>	
-	<h>(以單一技能過濾 </h>	
-	<input type="checkbox" id="" onchange="changeFliterWay()">
-	<h>)</h>
-	<h>(不顯示篩選紅框 </h>	
-	<input type="checkbox" id="" onchange="changeHighLightStroke()">
-	<h>)</h>
-	<br><br>
+<body>
+  <div>
+    <span style="font-size:20px;">【使用說明】</span>
+    <p>就是一個簡單的關鍵字搜索 / 過濾。為求資訊簡潔化，效果回合、說明都被省略或改用其他方式描述。
+    <span style="color:#B22222;">正確的使用方式</span>是找到目標後去遊戲內看詳細資料。</p>
+    <p>僅會顯示符合<span style="color:#B22222;">所有勾選條件</span>的結果。</p>
+  </div>
+  <hr>
+  <div id="characterType" class="row">
+    <span>角色類型：</span>
+    <div>
+      <label><input type="checkbox" value="金位" name="characterType">金位
+      <img src="./Img/金位.png" width="20" height="20" style="display: inline;"></label>
+      <label><input type="checkbox" value="黑位" name="characterType">黑位
+      <img src="./Img/黑位.png" width="20" height="20" style="display: inline;"></label>
+      <label><input type="checkbox" value="白位" name="characterType">白位
+      <img src="./Img/白位.png" width="20" height="20" style="display: inline;"></label>
+    </div>
+  </div>
+  <hr>
+  <div id="actionType" class="row">
+  <!--治療，疊盾，基礎傷害，破甲傷害，穿透傷害，純狀態，斬殺-->
+    <span>行動類型：</span>
+    <div>
+      <label><input type="checkbox" value="治療">治療</label>
+      <label><input type="checkbox" value="疊盾">疊盾</label>
+      <label><input type="checkbox" value="基礎傷害">基礎傷害</label>
+      <label><input type="checkbox" value="破甲傷害">破甲傷害</label>
+      <label><input type="checkbox" value="穿透傷害">穿透傷害</label>
+      <label><input type="checkbox" value="斬殺">斬殺</label>
+    </div>
+  </div>
+  <hr>
+  <div id="targetCharacter" class="row">
+    <span>作用對象：</span>
+    <div>
+      <label><input type="checkbox" value="指定單體">指定單體</label>
+      <label><input type="checkbox" value="隨機單體">隨機單體</label>
+      <label><input type="checkbox" value="自身">自身</label>
+      <label><input type="checkbox" value="全體">全體</label>
+      <label><input type="checkbox" value="首位">首位</label>
+      <label><input type="checkbox" value="末位">末位</label>
+      <label><input type="checkbox" value="條件對象">條件對象</label>
+      <label><input type="checkbox" value="雙方">雙方</label>
+      <label><input type="checkbox" value="我方">我方</label>
+      <label><input type="checkbox" value="同伴">同伴</label>
+      <label><input type="checkbox" value="敵方">敵方</label>
+      <label><input type="checkbox" value="首位以外">首位以外</label>
+      <label><input type="checkbox" value="金位">金位</label>
+      <label><input type="checkbox" value="黑位">黑位</label>
+      <label><input type="checkbox" value="白位">白位</label>
+    </div>
+  </div>
+  <hr>
+  <div id="buffAndDebuff" class="row">
+    <span>增益減益：</span>
+    <div>
+      <div class="with-icons">
+        <label><input type="checkbox" value="強化">強化
+        <img src="./Img/強化.png" width="20" height="20" style="display: inline;"></label>
+        <label><input type="checkbox" value="弱化">弱化
+        <img src="./Img/弱化.png" width="20" height="20" style="display: inline;"></label>
+        <label><input type="checkbox" value="易傷">易傷
+        <img src="./Img/易傷.png" width="20" height="20" style="display: inline;"></label>
+        <label><input type="checkbox" value="減傷">減傷
+        <img src="./Img/減傷.png" width="20" height="20" style="display: inline;"></label>
+        <label><input type="checkbox" value="靈巧">靈巧
+        <img src="./Img/靈巧.png" width="20" height="20" style="display: inline;"></label>
+        <label><input type="checkbox" value="中毒">中毒
+        <img src="./Img/中毒.png" width="20" height="20" style="display: inline;"></label>
+        <label><input type="checkbox" value="再生">再生
+        <img src="./Img/再生.png" width="20" height="20" style="display: inline;"></label>
+        <label><input type="checkbox" value="撕裂">撕裂
+        <img src="./Img/撕裂.png" width="20" height="20" style="display: inline;"></label>
+        <label><input type="checkbox" value="轉盾">轉盾
+        <img src="./Img/轉盾.png" width="20" height="20" style="display: inline;"></label>
+        <label><input type="checkbox" value="盾轉">盾轉
+        <img src="./Img/盾轉.png" width="20" height="20" style="display: inline;"></label>
+        <label><input type="checkbox" value="嘲諷">嘲諷
+        <img src="./Img/嘲諷.png" width="20" height="20" style="display: inline;"></label>
+        <label><input type="checkbox" value="戰意">戰意
+        <img src="./Img/戰意.png" width="20" height="20" style="display: inline;"></label>
+      </div>
+      <div class="special">
+        <label><input type="checkbox" value="獨有狀態">獨有狀態
+        <img src="./Img/獨有疊層.png" width="20" height="20" style="display: inline;"></label>
+        <label><input type="checkbox" value="獨有疊層">獨有疊層
+        <img src="./Img/獨有疊層.png" width="20" height="20" style="display: inline;"></label>
+        <label><input type="checkbox" value="移除魂芯">移除魂芯</label>
+        <label><input type="checkbox" value="重整版面">重整版面</label>
+        <label><input type="checkbox" value="冷卻增加">冷卻增加</label>
+        <label><input type="checkbox" value="冷卻歸零">冷卻歸零</label>
+      </div>
+      <div class="bykinds">
+        <label><input type="checkbox" value="正面狀態">正面狀態</label>
+        <label><input type="checkbox" value="負面狀態">負面狀態</label>
+        <label><input type="checkbox" value="解除狀態">解除狀態</label>
+        <label><input type="checkbox" value="條件增傷">條件增傷</label>
+        <label><input type="checkbox" value="型態切換">型態切換</label>
+        <label><input type="checkbox" value="額外技能">額外技能</label>
+        <label><input type="checkbox" value="自身失血">自身失血</label>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div id="passiveRule" class="row">
+    <span>被動/參謀相關：</span>
+    <div>
+      <label><input type="checkbox" value="主動">主動</label>
+      <label><input type="checkbox" value="被動">被動</label>
+      <label><input type="checkbox" value="戰鬥開始">戰鬥開始</label>
+      <label><input type="checkbox" value="回合開始">回合開始</label>
+      <label><input type="checkbox" value="回合結束">回合結束</label>
+      <label><input type="checkbox" value="死亡">死亡</label>
+      <label><input type="checkbox" value="反擊">反擊</label>
+      <label><input type="checkbox" value="條件觸發">條件觸發</label> 
+      <label><input type="checkbox" value="魂芯轉換">魂芯轉換</label>
+      <label><input type="checkbox" value="效果增加">效果增加</label>
+    </div>
+  </div>
+  <button onclick="clearRule()">清空條件</button>
+  <button onclick="getResult()">過濾</button> 
+  <h>(以單一技能過濾 </h>  
+  <input type="checkbox" id="" onchange="changeFliterWay()">
+  <h>)</h>
+  <h>(不顯示篩選紅框 </h>  
+  <input type="checkbox" id="" onchange="changeHighLightStroke()">
+  <h>)</h>
+  <br><br>
 
-	<svg id="basicSVG" width="1800" height="500">
-		<g id="basicIcon">
-			<image x="270" y="0" width="70" height="70" xlink:href="./Img/oneBlock_icon.png"></image>
-			<image x="520" y="0" width="70" height="70" xlink:href="./Img/twoBlock_icon.png"></image>
-			<image x="770" y="0" width="70" height="70" xlink:href="./Img/fourBlock_icon.png"></image>
-			<image x="1020" y="0" width="70" height="70" xlink:href="./Img/passiveSkill_icon.png"></image>
-			<image x="1270" y="0" width="70" height="70" xlink:href="./Img/advisorSkill_icon.png"></image>
-			<!--<path d="M 180,0 l 0,2000" stroke="#886600" stroke-width="5"/>
-			<path d="M 430,0 l 0,2000" stroke="#886600" stroke-width="5"/>
-			<path d="M 680,0 l 0,2000" stroke="#886600" stroke-width="5"/>
-			<path d="M 930,0 l 0,2000" stroke="#886600" stroke-width="5"/>
-			<path d="M 1180,0 l 0,2000" stroke="#886600" stroke-width="5"/>
-			<path d="M 0,100 l 1500,0" stroke="#886600" stroke-width="5"/>-->
-		</g>
-		<g id="resultGroup">
+  <svg id="basicSVG" width="1800" height="500">
+    <g id="basicIcon">
+      <image x="270" y="0" width="70" height="70" xlink:href="./Img/oneBlock_icon.png"></image>
+      <image x="520" y="0" width="70" height="70" xlink:href="./Img/twoBlock_icon.png"></image>
+      <image x="770" y="0" width="70" height="70" xlink:href="./Img/fourBlock_icon.png"></image>
+      <image x="1020" y="0" width="70" height="70" xlink:href="./Img/passiveSkill_icon.png"></image>
+      <image x="1270" y="0" width="70" height="70" xlink:href="./Img/advisorSkill_icon.png"></image>
+      <!--<path d="M 180,0 l 0,2000" stroke="#886600" stroke-width="5"/>
+      <path d="M 430,0 l 0,2000" stroke="#886600" stroke-width="5"/>
+      <path d="M 680,0 l 0,2000" stroke="#886600" stroke-width="5"/>
+      <path d="M 930,0 l 0,2000" stroke="#886600" stroke-width="5"/>
+      <path d="M 1180,0 l 0,2000" stroke="#886600" stroke-width="5"/>
+      <path d="M 0,100 l 1500,0" stroke="#886600" stroke-width="5"/>-->
+    </g>
+    <g id="resultGroup">
 
-		</g>
-	</svg>
+    </g>
+  </svg>
 </body>
 <footer style="text-align:right">
   <label>最後更新遊戲版本號:1.1.2 |</label>

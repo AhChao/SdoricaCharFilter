@@ -4,6 +4,46 @@ img{
 input{
 	display: inline;
 }
+.header {
+	display: flex;
+	align-items: center;
+}
+
+label {
+	min-width: 120px;
+	flex: 0 0 120px;
+}
+.row > span {
+	line-height: 1.2rem;
+	flex: 0 0 160px;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+}
+
+.row > div {
+	align-self: center;
+	align-content: flex-start;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#buffAndDebuff > div {
+	flex-direction: column;
+}
+
+#buffAndDebuff > div > div {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-content: flex-start;
+}
+
+label {
+	display: flex;
+}
 
 @font-face {
     font-family:"GJG";
