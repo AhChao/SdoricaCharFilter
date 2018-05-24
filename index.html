@@ -18,7 +18,7 @@
   <hr>
   <div id="characterType" class="row">
     <span>角色類型：</span>
-    <div>
+    <div id="characterTypeInner">
       <label><input type="checkbox" value="金位" name="characterType">金位
       <img src="./Img/金位.png" width="20" height="20" style="display: inline;"></label>
       <label><input type="checkbox" value="黑位" name="characterType">黑位
@@ -31,7 +31,7 @@
   <div id="actionType" class="row">
   <!--治療，疊盾，基礎傷害，破甲傷害，穿透傷害，純狀態，斬殺-->
     <span>行動類型：</span>
-    <div>
+    <div id="actionTypeInner">
       <label><input type="checkbox" value="治療">治療</label>
       <label><input type="checkbox" value="疊盾">疊盾</label>
       <label><input type="checkbox" value="基礎傷害">基礎傷害</label>
@@ -43,7 +43,7 @@
   <hr>
   <div id="targetCharacter" class="row">
     <span>作用對象：</span>
-    <div>
+    <div id="targetCharacterInner">
       <label><input type="checkbox" value="指定單體">指定單體</label>
       <label><input type="checkbox" value="隨機單體">隨機單體</label>
       <label><input type="checkbox" value="自身">自身</label>
@@ -65,7 +65,7 @@
   <div id="buffAndDebuff" class="row">
     <span>增益減益：</span>
     <div>
-      <div class="with-icons">
+      <div class="with-icons" id="buffAndDebuffInner1">
         <label><input type="checkbox" value="強化">強化
         <img src="./Img/強化.png" width="20" height="20" style="display: inline;"></label>
         <label><input type="checkbox" value="弱化">弱化
@@ -91,7 +91,7 @@
         <label><input type="checkbox" value="戰意">戰意
         <img src="./Img/戰意.png" width="20" height="20" style="display: inline;"></label>
       </div>
-      <div class="special">
+      <div class="special" id="buffAndDebuffInner2">
         <label><input type="checkbox" value="獨有狀態">獨有狀態
         <img src="./Img/獨有疊層.png" width="20" height="20" style="display: inline;"></label>
         <label><input type="checkbox" value="獨有疊層">獨有疊層
@@ -101,7 +101,7 @@
         <label><input type="checkbox" value="冷卻增加">冷卻增加</label>
         <label><input type="checkbox" value="冷卻歸零">冷卻歸零</label>
       </div>
-      <div class="bykinds">
+      <div class="bykinds" id="buffAndDebuffInner3">
         <label><input type="checkbox" value="正面狀態">正面狀態</label>
         <label><input type="checkbox" value="負面狀態">負面狀態</label>
         <label><input type="checkbox" value="解除狀態">解除狀態</label>
@@ -115,7 +115,7 @@
   <hr>
   <div id="passiveRule" class="row">
     <span>被動/參謀相關：</span>
-    <div>
+    <div id="passiveRuleInner">
       <label><input type="checkbox" value="主動">主動</label>
       <label><input type="checkbox" value="被動">被動</label>
       <label><input type="checkbox" value="戰鬥開始">戰鬥開始</label>
@@ -157,10 +157,10 @@
     </g>
   </svg>
 </body>
-<footer style="text-align:right">
-  <label>最後更新遊戲版本號:1.1.2 |</label>
-  <label>最後更新日期:18/5/20 |</label>
-  <label>Written by: <a href="https://github.com/AhChao">AhChao</a></label>
+<footer style="text-align:right;">
+  <h>最後更新遊戲版本號:1.1.2 |</h>
+  <h>最後更新日期:18/5/24 |</h>
+  <h>Written by: <a href="https://github.com/AhChao">AhChao</a></h>
 </footer>
 <script src="./Lib/jquery-3.2.1.min.js"></script>
 <script src="./Lib/d3.v3.min.js"></script>

@@ -26,7 +26,7 @@ function getResult()
 
 	//資料準備：篩選選項
 	ruleForFilter=[];
-	var ruleArray = ["actionType","targetCharacter","buffAndDebuff","passiveRule"];//角色type另外驗證
+	var ruleArray = ["actionTypeInner","targetCharacterInner","buffAndDebuffInner1","buffAndDebuffInner2","buffAndDebuffInner3","passiveRuleInner"];//角色type另外驗證
 	for(var i in ruleArray)
 	{
 		for(var j in d3.select("#"+ruleArray[i]).node().childNodes)//走訪SVG內所有圖形做相交比較
@@ -50,9 +50,9 @@ function getResult()
 	console.log("篩選規則:",ruleForFilter);
 
 	var typeVertify = [];
-	for(var i in d3.select("#characterType").node().childNodes)
+	for(var i in d3.select("#characterTypeInner").node().childNodes)
 	{
-		var node = d3.select("#characterType").node().childNodes[i];
+		var node = d3.select("#characterTypeInner").node().childNodes[i];
 		var tagName = node.tagName;
 		if(tagName=="LABEL")
 		{
