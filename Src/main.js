@@ -408,7 +408,7 @@ function printText(targetSVG,text,x,y,color)
 
 function clearRule()
 {
-	var ruleArray = ["characterType","actionType","targetCharacter","buffAndDebuff","passiveRule"];//角色type另外驗證
+	var ruleArray = ["characterTypeInner","actionTypeInner","targetCharacterInner","buffAndDebuffInner1","buffAndDebuffInner2","buffAndDebuffInner3","passiveRuleInner"];//角色type另外驗證
 	for(var i in ruleArray)
 	{		
 		for(var j in d3.select("#"+ruleArray[i]).node().childNodes)//走訪SVG內所有圖形做相交比較
